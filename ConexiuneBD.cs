@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using MySqlConnector;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,23 +11,25 @@ namespace ChatterinoApp
 {
     internal class ConexiuneBD {
 
-        private static SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder() {
-            DataSource = "<adresa bazei de date>",
+         private static MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder
+        {
+            Server = "<adresa/ip-ul bazei de date>",
             UserID = "<username>",
             Password = "<parola>",
-            InitialCatalog = "<nume baza de date>"
+            Database = "<numele bazei de date>",
         };
 
-        private static SqlConnection connection = new SqlConnection(builder.ConnectionString);
+        private static MySqlConnection connection = new MySqlConnection(builder.ConnectionString);
 
         private static string parola_decriptata;
+        
         public static Boolean logare(String username, String parola, ErrorProvider errors, TextBox user, TextBox pass) {
             try {
                 connection.Open();
-                String search = "SELECT * from <tabela_dvs> WHERE username='" + username + "'";
+                String search = "SELECT * from <nume_tabela> WHERE username='" + username + "'";
 
-                SqlCommand sqlcommand = new SqlCommand(search, connection);
-                SqlDataReader dr = sqlcommand.ExecuteReader();
+                MySqlCommand sqlcommand = new MySqlCommand(search, connection);
+                MySqlDataReader dr = sqlcommand.ExecuteReader();
 
                 /* Verificam daca userul exista in baza de date, iar daca exista, daca parola setata este corecta. */
                 if (dr.Read()) /* Userul exista. */
@@ -61,13 +64,13 @@ namespace ChatterinoApp
                 connection.Open();
 
                 /* Introducem un nou utilizator in baza de date. */
-                String search = "SELECT username, email from <tabela dvs>";
-                String insert = "INSERT into <tabela dvs> (username, password, email) values (@user, @pass, @email)";
+                String search = "SELECT username, email from <nume_tabela>";
+                String insert = "INSERT into <nume_tabela> (username, password, email) values (@user, @pass, @email)";
 
-                SqlCommand inserare = new SqlCommand(insert, connection); 
+                MySqlCommand inserare = new MySqlCommand(insert, connection);  
 
-                using (SqlCommand sqlcommand = new SqlCommand(search, connection)) {
-                    using (SqlDataReader reader = sqlcommand.ExecuteReader()) {
+                using (MySqlCommand sqlcommand = new MySqlCommand(search, connection)) {
+                    using (MySqlDataReader reader = sqlcommand.ExecuteReader()) {
                         while (reader.Read()) {
                             /* Verificam daca nu deja exista un user cu username-ul specificat
                              * sau cu email-ul specificat. */
@@ -106,10 +109,10 @@ namespace ChatterinoApp
             try
             {
                 connection.Open();
-                String search = "SELECT * from <tabela dvs> WHERE username='" + username + "' AND email='" + email + "'";
+                String search = "SELECT * from <nume_tabela> WHERE username='" + username + "' AND email='" + email + "'";
 
-                SqlCommand sqlcommand = new SqlCommand(search, connection);
-                SqlDataReader dr = sqlcommand.ExecuteReader();
+                MySqlCommand sqlcommand = new MySqlCommand(search, connection);
+                MySqlDataReader dr = sqlcommand.ExecuteReader();
 
                 /* Verificam daca userul exista in baza de date, iar daca exista, verificam daca email-ul corespunde. */
                 if (dr.Read()) /* Userul exista. */
