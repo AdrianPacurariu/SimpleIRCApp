@@ -56,7 +56,7 @@ Conectare realizata cu succes.
 
 ### Structura bazei de date
 - parolele sunt criptate;
-- 
+
 ![Database](https://user-images.githubusercontent.com/92821731/167262095-370f4873-91ac-4520-b8d8-18cfe4555f01.png)
 
 
