@@ -1,6 +1,6 @@
 # Chatterino! - Simple IRC App
 - aplicatie simpla de chat folosind API IRC (Internet Relay Chat);
-- conturile sunt salvate/verificate in baza de date online (Azure);
+- conturile sunt salvate/verificate in baza de date online (Google Cloud Database);
 - proiect realizat pentru laboratorul de MTP si PIUG;
 
 ## Fereastra principala
