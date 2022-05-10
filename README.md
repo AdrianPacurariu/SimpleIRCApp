@@ -1,5 +1,5 @@
 # Chatterino! - Simple IRC App
-- aplicatie simpla de chat folosind API IRC (Internet Relay Chat);
+- aplicatie simpla de chat folosind [API IRC](https://github.com/EldinZenderink/SimpleIRCLib) (Internet Relay Chat); (thanks EldinZenderink)
 - conturile sunt salvate/verificate in baza de date online (Google Cloud Database);
 - proiect realizat pentru laboratorul de MTP si PIUG;
 
